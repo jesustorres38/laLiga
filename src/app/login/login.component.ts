@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
   public formularioLogin;
   public error;
 
-  constructor(private ruta: Router) {   }
+  constructor(public ruta: Router) {   }
 
   ngOnInit() {
     this.formularioLogin = new FormGroup({
@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  //Cuando hace login en el formulario se llama esta funcion
   login(userData){
     return firebase.auth().signInWithEmailAndPassword(userData.email, userData.password)
     .then(res => {
@@ -32,7 +33,7 @@ export class LoginComponent implements OnInit {
     .catch(error => {
       console.log(error.message);
       this.error = error.message;
-});
+    });
   }
 
 }
