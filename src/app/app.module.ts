@@ -2,6 +2,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 //Main component
 import { AppComponent } from './app.component';
@@ -43,6 +44,8 @@ firebase.initializeApp(config);
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot([
       {path:'inicio', component: HomeComponent },
       {path:'navbar', component: NavbarComponent},
