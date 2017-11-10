@@ -1,3 +1,2 @@
-<p>
-  admin works!
-</p>
+<p *ngIf="auth.estado">Hola "{{email}}" .....Esta es la lista de perros para editar</p>
+<p *ngIf="!auth.estado">Debes estar logeado para poder administrar la lista</p>

@@ -18,6 +18,7 @@ import { ContactComponent } from './contact/contact.component';
 import { AdminComponent } from './admin/admin.component';
 
 //Firebase Connection
+import { AuthService } from './auth.service';
 import * as firebase from 'firebase'; 
 // Initialize Firebase
 var config = {
@@ -58,7 +59,7 @@ firebase.initializeApp(config);
       {path:'**', component: NotFoundComponent}
     ])
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
