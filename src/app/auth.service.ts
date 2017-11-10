@@ -5,8 +5,9 @@ import * as firebase from 'firebase';
 @Injectable()
 export class AuthService {
 
-  public estado = false;
-  public email;
+  public estado: boolean = false;
+  public email: string = "";
+  public errorLogIn: string = "";
 
   constructor(public ruta: Router) { }
 
@@ -20,6 +21,17 @@ export class AuthService {
         console.log("no hay nadie");
         this.estado = false;
     }
+  }
+
+  logIn(userData){
+    var user = firebase.auth().signInWithEmailAndPassword(userData.email, userData.password);
+    user.then(res => {
+      console.log("Bienvenido "+res.email);
+      this.ruta.navigateByUrl('/administrar'); 
+    });
+    user.catch(res => {
+      this.errorLogIn = res.message;
+    });
   }
 
   logOut(){

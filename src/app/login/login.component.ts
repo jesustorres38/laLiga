@@ -1,3 +1,4 @@
+import { AuthService } from './../auth.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms'; 
@@ -11,9 +12,8 @@ import * as firebase from 'firebase';
 export class LoginComponent implements OnInit {
 
   public formularioLogin;
-  public error;
 
-  constructor(public ruta: Router) {   }
+  constructor(public auth: AuthService) {   }
 
   ngOnInit() {
     this.formularioLogin = new FormGroup({
@@ -21,19 +21,4 @@ export class LoginComponent implements OnInit {
       password: new FormControl()
     });
   }
-
-  //Cuando hace login en el formulario se llama esta funcion
-  login(userData){
-    return firebase.auth().signInWithEmailAndPassword(userData.email, userData.password)
-    .then(res => {
-      //si el usuario se logea de forma correcta hace esto sino va al .catch
-      console.log(res);
-      this.ruta.navigateByUrl('/perros');      
-    })
-    .catch(error => {
-      console.log(error.message);
-      this.error = error.message;
-    });
-  }
-
 }
