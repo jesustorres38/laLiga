@@ -8,13 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminComponent implements OnInit {
 
-  public email;
-
   constructor(public auth: AuthService) { }
 
   ngOnInit() {
     this.auth.verificarLog();
-    this.email = this.auth.email;
   }
 
 }

@@ -1,2 +1,15 @@
-<p *ngIf="auth.estado">Hola "{{email}}" .....Esta es la lista de perros para editar</p>
-<p *ngIf="!auth.estado">Debes estar logeado para poder administrar la lista</p>
+<div *ngIf="auth.estado">
+    <div class="row">
+        <div class="col">
+            <h4 class="card-title">Bienvenido "{{auth.email}}"</h4>
+            <h6 class="card-subtitle mb-2 text-muted">Aqui podras Agregar, Elminar y Actualizar la base de datos.</h6>
+            
+        </div>
+    </div>
+</div>
+<div *ngIf="!auth.estado" class="alert alert-danger" role="alert">
+    <h4 class="alert-heading">Solo Personal Autorizado!</h4>
+    <p>El area de administracion se utiliza para hacer cambios en la lista de animales dentro de la protectora. Solo puede acceder el personal autorizado.</p>
+    <hr>
+    <p class="mb-0">En caso de estar autorizado inicia sesion y regresa a esta ventana.</p>
+</div>
