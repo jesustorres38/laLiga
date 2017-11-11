@@ -8,6 +8,7 @@ export class AuthService {
   public estado: boolean = false;
   public email: string = "";
   public errorLogIn: string = "";
+  public animalId = 25;
 
   constructor(public ruta: Router) { }
 
@@ -45,6 +46,14 @@ export class AuthService {
     }
   }
 
-  
-
+  add(animalData){
+    var animal = firebase.database().ref('id').once('value');
+    animal.then(res => {
+      console.log(res.val());
+      this.animalId = res.val();
+    });
+    animal.catch(res => {
+      console.log("ocurrio un error");
+    });
+  } 
 }
