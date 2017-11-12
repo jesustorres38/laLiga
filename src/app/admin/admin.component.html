@@ -7,11 +7,11 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-subtitle mb-2">Agregar Nuevo</h5>
-                    <form [formGroup]="formularioAdd" (ngSubmit)="auth.add(formularioAdd.value)">
+                    <form [formGroup]="formularioAdd" (ngSubmit)="add(formularioAdd.value)">
                         <div class="form-row">
                             <div class="form-group col-6">
                                 <label for="">Nombre</label>
-                                <input formControlName="nombre" type="text" class="form-control" id="" placeholder="Nombre">
+                                <input formControlName="nombre" required type="text" class="form-control" id="" placeholder="Nombre">
                             </div>
                             <div class="form-group col-3">
                                 <label for="">Edad</label>
@@ -20,7 +20,6 @@
                             <div class="form-group col-3">
                                 <label for="sexo">Sexo</label>
                                 <select formControlName="sexo" class="form-control" id="sexo">
-                                    <option>-</option>
                                     <option>Hembra</option>
                                     <option>Macho</option>
                                 </select>
@@ -38,7 +37,7 @@
                             <label for="">Foto</label>
                             <input formControlName="foto" type="file" class="form-control-file" id="">
                         </div>
-                        <button type="submit" class="btn btn-outline-success">Agregar</button>
+                        <button [disabled]="!formularioAdd.valid" type="submit" class="btn btn-outline-success">Agregar</button>
                     </form>
                 </div>
             </div>

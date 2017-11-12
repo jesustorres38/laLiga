@@ -1,4 +1,8 @@
 <p>
   Aqui vamos a desplegar la lista de perros
-  
 </p>
+<!-- <p>{{auth.animales[0]}}</p> -->
+<div *ngFor="let x of auth.animales; let i=index">
+    <p>Id: {{auth.animalesId[i]}}</p>
+    <p>Nombre: {{x.nombre}}</p>
+</div>

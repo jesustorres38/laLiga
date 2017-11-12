@@ -1,4 +1,4 @@
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from './../auth.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -18,13 +18,18 @@ export class AdminComponent implements OnInit {
     this.auth.verificarLog();
     // instanciamos el formulario
     this.formularioAdd = new FormGroup({
-      nombre: new FormControl(),
-      edad: new FormControl(),
-      sexo: new FormControl(),
-      origen: new FormControl(),
-      nota: new FormControl(),
-      foto: new FormControl()
+      nombre: new FormControl(null, Validators.required),
+      edad: new FormControl(null, Validators.required),
+      sexo: new FormControl(null, Validators.required),
+      origen: new FormControl(null, Validators.required),
+      nota: new FormControl(null, Validators.required),
+      foto: new FormControl(null)
     });
+  }
+
+  add(animalData){
+    this.auth.add(animalData);
+    this.formularioAdd.reset();
   }
 
 }

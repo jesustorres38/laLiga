@@ -9,6 +9,8 @@ export class AuthService {
   public estado: boolean = false;
   public email: string = "";
   public errorLogIn: string = "";
+  public animales = [];
+  public animalesId = [];
 
   constructor(public ruta: Router) { }
 
@@ -62,14 +64,21 @@ export class AuthService {
     .catch( res => {
         console.error("Ocurrio un error: ", res.message);
     });
-    // esto era para usarlo con realtime  database pero ahora usamos database firestore
-    // var animal = firebase.database().ref('id').once('value');
-    // animal.then(res => {
-    //   console.log(res.val());
-    //   this.animalId = res.val();
-    // });
-    // animal.catch(res => {
-    //   console.log("ocurrio un error");
-    // });
   } 
+  
+  show(){
+    var animales = firebase.firestore().collection("animales").get();
+    animales.then(res => {
+      // this.animales = this.animales.push(doc.data());
+      res.forEach(doc => {
+          // console.log(doc.id);
+         this.animalesId.push(doc.id);
+         this.animales.push(doc.data());
+         
+      });
+    });
+    animales.catch(res => {
+      console.log(res.message);
+    });
+  }
 }
