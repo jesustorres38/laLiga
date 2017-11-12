@@ -31,6 +31,7 @@ var config = {
 };
 firebase.initializeApp(config);
 
+
 @NgModule({
   declarations: [
     AppComponent,

@@ -1,6 +1,7 @@
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
+import 'firebase/firestore';
 
 @Injectable()
 export class AuthService {
@@ -8,7 +9,6 @@ export class AuthService {
   public estado: boolean = false;
   public email: string = "";
   public errorLogIn: string = "";
-  public animalId = 25;
 
   constructor(public ruta: Router) { }
 
@@ -47,13 +47,29 @@ export class AuthService {
   }
 
   add(animalData){
-    var animal = firebase.database().ref('id').once('value');
-    animal.then(res => {
-      console.log(res.val());
-      this.animalId = res.val();
+    var animal = firebase.firestore().collection("animales");
+    animal.add({
+        nombre: animalData.nombre,
+        edad: animalData.edad,
+        sexo: animalData.sexo,
+        origen: animalData.origen,
+        nota: animalData.nota,
+        foto: animalData.foto
+    })
+    .then( res => {
+        console.log("Se agrego a: "+res.id+" a la base de datos");
+    })
+    .catch( res => {
+        console.error("Ocurrio un error: ", res.message);
     });
-    animal.catch(res => {
-      console.log("ocurrio un error");
-    });
+    // esto era para usarlo con realtime  database pero ahora usamos database firestore
+    // var animal = firebase.database().ref('id').once('value');
+    // animal.then(res => {
+    //   console.log(res.val());
+    //   this.animalId = res.val();
+    // });
+    // animal.catch(res => {
+    //   console.log("ocurrio un error");
+    // });
   } 
 }
