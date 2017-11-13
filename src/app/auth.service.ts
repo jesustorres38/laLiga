@@ -64,9 +64,16 @@ export class AuthService {
     .catch( res => {
         console.error("Ocurrio un error: ", res.message);
     });
+    //llamamos a la funcion show para 
+    //que se actualice la lista de perros luego de agregar uno nuevo
+    this.show();
   } 
   
   show(){
+    //reseteamos valores
+    this.animalesId = [];
+    this.animales = [];
+    
     var animales = firebase.firestore().collection("animales").get();
     animales.then(res => {
       // this.animales = this.animales.push(doc.data());
@@ -74,7 +81,6 @@ export class AuthService {
           // console.log(doc.id);
          this.animalesId.push(doc.id);
          this.animales.push(doc.data());
-         
       });
     });
     animales.catch(res => {
