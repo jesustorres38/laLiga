@@ -109,10 +109,9 @@ export class AuthService {
   }
 
   deleteAnimal(id){
-    // var deleteAnimal = firebase.firestore().collection("animales").doc(id).delete();
-    // deleteAnimal.then(res => console.log("animal eliminado correctamente"));
-    // deleteAnimal.catch(res => console.log(res.message));
-    // this.show();
-    console.log("se elimino a "+id);
+    var deleteAnimal = firebase.firestore().collection("animales").doc(id).delete();
+    deleteAnimal.then(res => console.log("animal eliminado correctamente"));
+    deleteAnimal.catch(res => console.log(res.message));
+    this.show();
   }
 }

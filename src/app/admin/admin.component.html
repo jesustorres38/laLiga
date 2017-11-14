@@ -1,110 +1,104 @@
-<div *ngIf="auth.estado">
-    <div class="row justify-content-center">
-        <div class="col-md-10">
-            <h4 class="card-title">Bienvenido "{{auth.email}}"</h4>
-            <h6 class="card-subtitle mb-2 text-muted">Aqui podras Agregar, Elminar y Actualizar la base de datos.</h6>
-            <br>
-            <!-- Formulario para Agregar nuevos -->
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-subtitle mb-2">Agregar Nuevo</h5>
-                    <form [formGroup]="formularioAdd" (ngSubmit)="add(formularioAdd.value)">
-                        <div class="form-row">
-                            <div class="form-group col-6">
-                                <label for="">Nombre</label>
-                                <input formControlName="nombre" required type="text" class="form-control" id="" placeholder="Nombre">
-                            </div>
-                            <div class="form-group col-3">
-                                <label for="">Edad</label>
-                                <input formControlName="edad" type="number" class="form-control" id="" placeholder="Edad">
-                            </div>
-                            <div class="form-group col-3">
-                                <label for="sexo">Sexo</label>
-                                <select formControlName="sexo" class="form-control" id="sexo">
-                                    <option>Hembra</option>
-                                    <option>Macho</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="">Origen</label>
-                            <input formControlName="origen" type="text" class="form-control" id="" placeholder="Como llego a la protectora">
-                        </div>
-                        <div class="form-group">
-                            <label for="">Nota</label>
-                            <textarea formControlName="nota" class="form-control" id="" rows="2"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="">Foto</label>
-                            <input formControlName="foto" type="file" class="form-control-file" id="">
-                        </div>
-                        <button [disabled]="!formularioAdd.valid" type="submit" class="btn btn-outline-success">Agregar</button>
-                    </form>
+<div *ngIf="auth.estado" class="row justify-content-center">
+    <div class="col-md-12 col-10">
+        <h5>Bienvenido {{auth.email}}</h5>
+        <h6 class="text-muted">Aqui podras Agregar, Elminar y Actualizar la base de datos.</h6>
+        <br>
+    </div>
+    <!-- Formulario para Agregar nuevos -->
+    <div class="col-md-6 col-10">
+        <h5>Agregar Nuevo</h5>
+        <form [formGroup]="formularioAdd" (ngSubmit)="add(formularioAdd.value)">
+            <div class="form-row">
+                <div class="form-group col-6">
+                    <label for="">Nombre</label>
+                    <input formControlName="nombre" required type="text" class="form-control" id="" placeholder="Nombre">
+                </div>
+                <div class="form-group col-3">
+                    <label for="">Edad</label>
+                    <input formControlName="edad" type="number" class="form-control" id="" placeholder="Edad">
+                </div>
+                <div class="form-group col-3">
+                    <label for="sexo">Sexo</label>
+                    <select formControlName="sexo" class="form-control" id="sexo">
+                        <option>Hembra</option>
+                        <option>Macho</option>
+                    </select>
                 </div>
             </div>
-            <br>
-            <!-- Lista para Mostrar los Animales -->
-            <h4>Lista de Animales</h4>
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Edad</th>
-                    <th scope="col">Sexo</th>
-                    <th scope="col">icono</th>
-                    </tr>
-                </thead>
-                <tbody *ngFor="let x of auth.animales; let i=index">
-                    <tr>
-                    <th scope="row">{{auth.animalesId[i]}}</th>
-                    <td>{{x.nombre}}</td>
-                    <td>{{x.edad}}</td>
-                    <td>{{x.sexo}}</td>
-                    <td><button (click)="delete(auth.animalesId[i],x.nombre)" data-toggle="modal" data-target="#deleteModal" type="button" class="btn btn-danger">Eliminar</button></td>
-                    </tr>
-                </tbody>
-                </table>
-                
-        </div>
-        <!-- <div *ngFor="let x of auth.animales; let i=index">
-            <div class="col-md-3">
-                <div class="card" style="width: 15rem;">
-                    <img class="card-img-top img-fluid" src="./assets/animales.png" alt="Card image cap">
-                    <div class="card-body">
-                    <p>Nombre: <strong>{{x.nombre}}</strong>, {{x.edad}} años.</p>
-                    <p>Origen:<i class="text-muted">"{{x.origen}}"</i></p>
-                    
-                    </div>
-                </div>
-                <br>
+            <div class="form-group">
+                <label for="">Origen</label>
+                <input formControlName="origen" type="text" class="form-control" id="" placeholder="Como llego a la protectora">
             </div>
-        </div> -->
+            <div class="form-group">
+                <label for="">Nota</label>
+                <textarea formControlName="nota" class="form-control" id="" rows="2"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="">Foto</label>
+                <input formControlName="foto" type="file" class="form-control-file" id="">
+            </div>
+            <button [disabled]="!formularioAdd.valid" type="submit" class="btn btn-outline-success">Agregar</button>
+        </form>
+        <br>
+    </div>
+    <!-- Lista para Mostrar los Animales -->
+    <div class="col-md-6 col-10">
+        <h5>Lista de Animales</h5>
+        <table class="table table-hover table-responsive">
+            <thead>
+                <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Edad</th>
+                <th scope="col">Sexo</th>
+                <th><i class="fa fa-pencil" aria-hidden="true"></i></th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let x of auth.animales; let i=index">
+                <tr>
+                <th scope="row">{{i+1}}</th>
+                <td>{{x.nombre}}</td>
+                <td>{{x.edad}}</td>
+                <td>{{x.sexo}}</td>
+                <td>
+                    <i (click)="delete(auth.animalesId[i],x.nombre)" data-toggle="modal" data-target="#deleteModal" class="fa fa-trash" aria-hidden="true"></i>
+                    -
+                    <i routerLink="/perros-profile/{{auth.animalesId[i]}}" class="fa fa-address-card" aria-hidden="true"></i>                                
+                </td>
+                </tr>
+            </tbody>
+        </table> 
+        <br>
     </div>
 </div>
-<div *ngIf="!auth.estado" class="alert alert-danger" role="alert">
-    <h4 class="alert-heading">Solo Personal Autorizado!</h4>
-    <p>El area de administracion se utiliza para hacer cambios en la lista de animales dentro de la protectora. Solo puede acceder el personal autorizado.</p>
-    <hr>
-    <p class="mb-0">En caso de estar autorizado inicia sesion y regresa a esta ventana.</p>
+
+<div *ngIf="!auth.estado" class="row justify-content-center">
+    <div class="col-10">
+        <div class="alert alert-danger" role="alert">
+            <h4 class="alert-heading">Solo Personal Autorizado!</h4>
+            <p>El area de administracion se utiliza para hacer cambios en la lista de animales dentro de la protectora. Solo puede acceder el personal autorizado.</p>
+            <hr>
+            <p class="mb-0">En caso de estar autorizado inicia sesion y regresa a esta ventana.</p>
+        </div>
+    </div>
 </div>
 <!-- Modal -->
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-<div class="modal-dialog" role="document">
-    <div class="modal-content">
-    <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Eliminar</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-        </button>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Eliminar</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            Esta seguro de que quiere eliminar a {{animalSure}}?
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
+            <button (click)="auth.deleteAnimal(animalId)" type="button" class="btn btn-danger" data-dismiss="modal">Eliminar</button>
+        </div>
+        </div>
     </div>
-    <div class="modal-body">
-        Esta seguro de que quiere eliminar a {{animalSure}}?
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
-        <button (click)="auth.deleteAnimal(animalId)" type="button" class="btn btn-danger" data-dismiss="modal">Eliminar</button>
-    </div>
-    </div>
-</div>
 </div>
