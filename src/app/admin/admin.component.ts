@@ -10,6 +10,8 @@ import { Component, OnInit } from '@angular/core';
 export class AdminComponent implements OnInit {
 
   public formularioAdd;
+  public animalSure = "Animal";
+  public animalId = "";
 
   constructor(public auth: AuthService) { }
 
@@ -28,12 +30,15 @@ export class AdminComponent implements OnInit {
     //llamamos la funcion show para mostrar los perros
     this.auth.show();
   }
-
   
-
   add(animalData){
     this.auth.add(animalData);
     this.formularioAdd.reset();
+  }
+
+  delete(id, name){
+    this.animalSure = name;
+    this.animalId = id;
   }
 
 }
