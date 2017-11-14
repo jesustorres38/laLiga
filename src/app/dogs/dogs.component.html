@@ -10,7 +10,7 @@
           <div class="card-body">
             <p>Nombre: <strong>{{x.nombre}}</strong>, {{x.edad}} años.</p>
             <p>Origen:<i class="text-muted">"{{x.origen}}"</i></p>
-            <a routerLink="/inicio" class="btn btn-success">Ver</a>
+            <a routerLink="/perros-profile/{{auth.animalesId[i]}}" class="btn btn-success">Ver</a>
           </div>
         </div>
         <br>

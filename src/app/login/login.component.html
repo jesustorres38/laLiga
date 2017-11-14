@@ -1,15 +1,18 @@
-<form [formGroup]="formularioLogin" (ngSubmit)="auth.logIn(formularioLogin.value)">
-  <div class="form-group" >
-    <label for="email">Correo Electronico</label>
-    <input formControlName="email" type="email" class="form-control" id="email" placeholder="Correo Electronico">
+<div class="row">
+  <div class="col">
+    <form [formGroup]="formularioLogin" (ngSubmit)="auth.logIn(formularioLogin.value)">
+      <div class="form-group" >
+        <label for="email">Correo Electronico</label>
+        <input formControlName="email" type="email" class="form-control" id="email" placeholder="Correo Electronico">
+      </div>
+      <div class="form-group">
+        <label for="password">Contraseña</label>
+        <input formControlName="password" type="password" class="form-control" id="password" placeholder="Contraseña">
+      </div>
+      <div *ngIf="auth.errorLogIn" class="alert alert-danger" role="alert">
+        {{auth.errorLogIn}}
+      </div>
+      <button type="submit" class="btn btn-outline-success">Ingresar</button>
+    </form>
   </div>
-  <div class="form-group">
-    <label for="password">Contraseña</label>
-    <input formControlName="password" type="password" class="form-control" id="password" placeholder="Contraseña">
-  </div>
-  <div *ngIf="auth.errorLogIn" class="alert alert-danger" role="alert">
-    {{auth.errorLogIn}}
-  </div>
-  <button type="submit" class="btn btn-outline-success">Ingresar</button>
-</form>
-<p></p>
+</div>

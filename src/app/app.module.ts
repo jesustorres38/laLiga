@@ -53,7 +53,7 @@ firebase.initializeApp(config);
       {path:'navbar', component: NavbarComponent},
       {path:'contacto', component: ContactComponent},
       {path:'perros', component: DogsComponent},
-      {path:'perros/:id', component: DogProfileComponent},
+      {path:'perros-profile/:id', component: DogProfileComponent},
       {path:'login', component: LoginComponent},
       {path:'administrar', component: AdminComponent},
       {path:'', redirectTo:'inicio', pathMatch: 'full' },

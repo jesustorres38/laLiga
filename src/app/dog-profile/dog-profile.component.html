@@ -1,3 +1,12 @@
-<p>
-  dog-profile works!
-</p>
+<div class="row">
+  <div class="col">
+    <img class="img-fluid" src="./assets/animales.png">    
+  </div>  
+  <div class="col">
+    <p>Nombre: <strong>{{auth.animalProfile.nombre}}</strong></p>
+    <p>Edad: <strong>{{auth.animalProfile.edad}} (Años)</strong></p>
+    <p>Sexo: <strong>{{auth.animalProfile.sexo}}</strong></p>
+    <p>Origen: <i class="text-muted">{{auth.animalProfile.origen}}</i></p>
+    <p>Nota: <i class="text-muted">{{auth.animalProfile.nota}}</i></p>
+  </div>
+</div>

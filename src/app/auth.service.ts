@@ -11,6 +11,7 @@ export class AuthService {
   public errorLogIn: string = "";
   public animales = [];
   public animalesId = [];
+  public animalProfile = {};
 
   constructor(public ruta: Router) { }
 
@@ -86,5 +87,23 @@ export class AuthService {
     animales.catch(res => {
       console.log(res.message);
     });
+  }
+
+  showAnimal(id){
+    this.animalProfile = {};
+    var animalProfile = firebase.firestore().collection("animales").doc(id).get();
+    animalProfile.then(res => {
+      if (res.exists) {
+        console.log(res.data());
+        this.animalProfile = res.data();
+      } else {
+        console.log("no existe el perfil en la base de datos");
+      }
+    });
+    animalProfile.catch(function(error) {
+      console.log("Error getting document:", error);
+    });
+    
+
   }
 }
