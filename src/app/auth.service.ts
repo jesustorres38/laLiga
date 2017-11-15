@@ -114,4 +114,11 @@ export class AuthService {
     deleteAnimal.catch(res => console.log(res.message));
     this.show();
   }
+
+  agregar(name,foto){
+    //creamos la referencia
+    firebase.storage().ref('imagenes/'+name);
+    //subimos el archivo
+    firebase.storage().ref('imagenes/'+name).put(foto);
+  }
 }

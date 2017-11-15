@@ -4,3 +4,14 @@
     <p class="lead text-muted">Aqui podras encontrar informacion sobre los animales que se encuentra actualmente en la protectora.</p>
   </div>
 </section>
+<form>
+  <div class="form-group">
+    <label for="">nombre</label>
+    <input type="text" class="form-control-file" name="nombre" [(ngModel)]="nom">
+  </div>
+  <div class="form-group">
+    <label for="">Foto</label>
+    <input type="file" class="form-control-file" (change)="agregar($event)">
+  </div>
+  <button type="submit" class="btn btn-outline-success">Agregar</button>
+</form>
