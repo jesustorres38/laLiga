@@ -12,6 +12,7 @@ export class AdminComponent implements OnInit {
   public formularioAdd;
   public animalSure = "Animal";
   public animalId = "";
+  public animalFoto;
 
   constructor(public auth: AuthService) { }
 
@@ -32,13 +33,17 @@ export class AdminComponent implements OnInit {
   }
   
   add(animalData){
-    this.auth.add(animalData);
+    this.auth.add(animalData, this.animalFoto);
     this.formularioAdd.reset();
   }
 
   delete(id, name){
     this.animalSure = name;
     this.animalId = id;
+  }
+
+  getAnimalFoto(event){
+    this.animalFoto = event.target.files[0];
   }
 
 }

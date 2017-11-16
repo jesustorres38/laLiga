@@ -13,6 +13,7 @@ export class DogsComponent implements OnInit {
   ngOnInit() {
     this.auth.verificarLog();
     this.auth.show();
+    
   }
 
 }

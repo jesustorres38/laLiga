@@ -8,11 +8,14 @@ export class AuthService {
 
   public estado: boolean = false;
   public email: string = "";
+  //para mostrar error al hacer login
   public errorLogIn: string = "";
+  //para mostrar la lista de perros
   public animales = [];
   public animalesId = [];
+  //para mostrar el perfil en dog-profile
   public animalProfile = {};
-  
+  public animalFoto = "";
 
   constructor(public ruta: Router) { }
 
@@ -50,7 +53,7 @@ export class AuthService {
     }
   }
 
-  add(animalData){
+  add(animalData, animalFoto){
     var animal = firebase.firestore().collection("animales");
     animal.add({
         nombre: animalData.nombre,
@@ -62,10 +65,13 @@ export class AuthService {
     })
     .then( res => {
         console.log("Se agrego a: "+res.id+" a la base de datos");
+        firebase.storage().ref('imagenes/'+res.id).put(animalFoto);
     })
     .catch( res => {
         console.error("Ocurrio un error: ", res.message);
     });
+
+
     //llamamos a la funcion show para 
     //que se actualice la lista de perros luego de agregar uno nuevo
     this.show();
@@ -92,6 +98,8 @@ export class AuthService {
 
   showAnimal(id){
     this.animalProfile = {};
+    this.animalFoto = "";
+    //obtenemos los datos del perfil
     var animalProfile = firebase.firestore().collection("animales").doc(id).get();
     animalProfile.then(res => {
       if (res.exists) {
@@ -104,21 +112,32 @@ export class AuthService {
     animalProfile.catch(function(error) {
       console.log("Error getting document:", error);
     });
-    
-
+    //obtenemos la foto
+    var url = firebase.storage().ref('imagenes/'+id).getDownloadURL();
+    url.then(res => {
+      this.animalFoto = res;
+    });
+    url.catch(res => {
+      this.animalFoto = "./assets/profile-pic.jpg";
+      console.log(res.message);
+    });
   }
 
   deleteAnimal(id){
+    //borramos los datos del animal
     var deleteAnimal = firebase.firestore().collection("animales").doc(id).delete();
     deleteAnimal.then(res => console.log("animal eliminado correctamente"));
     deleteAnimal.catch(res => console.log(res.message));
+    //borramos la foto del animal
+    var deleteFoto = firebase.storage().ref('imagenes/'+id).delete();
+    deleteFoto.then(res => {
+      console.log("se elimino la foto correctamente");
+    });
+    deleteFoto.catch(res => {
+      console.log(res.message);
+    });
+    //volvemos a mostrar la lista para que se actualice
     this.show();
   }
 
-  agregar(name,foto){
-    //creamos la referencia
-    firebase.storage().ref('imagenes/'+name);
-    //subimos el archivo
-    firebase.storage().ref('imagenes/'+name).put(foto);
-  }
 }

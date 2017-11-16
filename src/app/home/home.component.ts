@@ -7,19 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  public foto;
 
   constructor(public auth: AuthService) { }
 
   ngOnInit() {
     this.auth.verificarLog();
-  }
-
-  agregar(event){
-    var file = event.target.files[0];
-    console.log(file);
-    this.auth.agregar(file.name,file);
-    
   }
 
 }
