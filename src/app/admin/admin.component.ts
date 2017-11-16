@@ -25,8 +25,7 @@ export class AdminComponent implements OnInit {
       edad: new FormControl(null, Validators.required),
       sexo: new FormControl(null, Validators.required),
       origen: new FormControl(null, Validators.required),
-      nota: new FormControl(null, Validators.required),
-      foto: new FormControl(null)
+      nota: new FormControl(null, Validators.required)
     });
     //llamamos la funcion show para mostrar los perros
     this.auth.show();

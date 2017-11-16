@@ -1,12 +1,15 @@
-<div class="row">
-  <div class="col">
-    <img class="img-fluid" src="{{auth.animalFoto}}" alt="imagen">    
+<div class="row justify-content-center">
+  <div class="col-10">
+    <section class="jumbotron text-center">
+      <div class="container">
+        <h1 class="jumbotron-heading">{{auth.animalProfile.nombre}}</h1>
+        <p class="lead text-muted"><strong>{{auth.animalProfile.edad}} (Años), {{auth.animalProfile.sexo}}:</strong> {{auth.animalProfile.origen}}  .</p>
+        <p class="lead text-muted">{{auth.animalProfile.nota}}</p>
+      </div>
+    </section>
   </div>  
-  <div class="col">
-    <p>Nombre: <strong>{{auth.animalProfile.nombre}}</strong></p>
-    <p>Edad: <strong>{{auth.animalProfile.edad}} (Años)</strong></p>
-    <p>Sexo: <strong>{{auth.animalProfile.sexo}}</strong></p>
-    <p>Origen: <i class="text-muted">{{auth.animalProfile.origen}}</i></p>
-    <p>Nota: <i class="text-muted">{{auth.animalProfile.nota}}</i></p>
+  <div class="col-md-6 col-sm-8 col-10">
+      <img class="img-fluid" src="{{auth.animalFoto}}" alt="imagen">         
+      <br><br> 
   </div>
 </div>

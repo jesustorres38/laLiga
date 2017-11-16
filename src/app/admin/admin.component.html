@@ -1,20 +1,24 @@
+<!-- Vista para usuarios logeados -->
 <div *ngIf="auth.estado" class="row justify-content-center">
-    <div class="col-md-12 col-10">
-        <h5>Bienvenido {{auth.email}}</h5>
-        <h6 class="text-muted">Aqui podras Agregar, Elminar y Actualizar la base de datos.</h6>
-        <br>
+    <div class="col-12">
+        <section class="jumbotron text-center">
+            <div class="container">
+                <h1 class="jumbotron-heading">Bienvenido</h1>
+                <p class="lead text-muted">Hola {{auth.email}}, aqui podras Agregar, Elminar y Actualizar la base de datos..</p>
+            </div>
+        </section>
     </div>
     <!-- Formulario para Agregar nuevos -->
-    <div class="col-md-6 col-10">
+    <div class="col-10">
         <h5>Agregar Nuevo</h5>
         <form [formGroup]="formularioAdd" (ngSubmit)="add(formularioAdd.value)">
             <div class="form-row">
                 <div class="form-group col-6">
-                    <label for="">Nombre</label>
+                    <label>Nombre</label>
                     <input formControlName="nombre" required type="text" class="form-control" id="" placeholder="Nombre">
                 </div>
                 <div class="form-group col-3">
-                    <label for="">Edad</label>
+                    <label>Edad</label>
                     <input formControlName="edad" type="number" class="form-control" id="" placeholder="Edad">
                 </div>
                 <div class="form-group col-3">
@@ -26,31 +30,32 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="">Origen</label>
-                <input formControlName="origen" type="text" class="form-control" id="" placeholder="Como llego a la protectora">
+                <label>Origen</label>
+                <input formControlName="origen" type="text" class="form-control" placeholder="Como llego a la protectora">
             </div>
             <div class="form-group">
-                <label for="">Nota</label>
+                <label>Nota</label>
                 <textarea formControlName="nota" class="form-control" id="" rows="2"></textarea>
             </div>
             <div class="form-group">
-                <label for="">Foto</label>
-                <input (change)="getAnimalFoto($event)" formControlName="foto" type="file" class="form-control-file">
+                <label>Foto</label>
+                <input (change)="getAnimalFoto($event)" type="file" class="form-control-file">
             </div>
             <button [disabled]="!formularioAdd.valid" type="submit" class="btn btn-outline-success">Agregar</button>
         </form>
-        <br>
+        <br><br>
     </div>
     <!-- Lista para Mostrar los Animales -->
-    <div class="col-md-6 col-10">
+    <div class="col-10">
         <h5>Lista de Animales</h5>
-        <table class="table table-hover table-responsive">
+        <table class="table table-hover table-sm table-responsive ">
             <thead>
                 <tr>
                 <th scope="col">#</th>
                 <th scope="col">Nombre</th>
                 <th scope="col">Edad</th>
                 <th scope="col">Sexo</th>
+                <th scope="col">Identificador</th>
                 <th><i class="fa fa-pencil" aria-hidden="true"></i></th>
                 </tr>
             </thead>
@@ -60,10 +65,11 @@
                 <td>{{x.nombre}}</td>
                 <td>{{x.edad}}</td>
                 <td>{{x.sexo}}</td>
+                <td>{{auth.animalesId[i]}}</td>
                 <td>
-                    <i (click)="delete(auth.animalesId[i],x.nombre)" data-toggle="modal" data-target="#deleteModal" class="fa fa-trash" aria-hidden="true"></i>
-                    -
-                    <i routerLink="/perros-profile/{{auth.animalesId[i]}}" class="fa fa-address-card" aria-hidden="true"></i>                                
+                    <button type="button" class="btn btn-success btn-sm" routerLink="/perros-profile/{{auth.animalesId[i]}}">Ver</button>                                                        
+                    <button type="button" class="btn btn-danger btn-sm" (click)="delete(auth.animalesId[i],x.nombre)" data-toggle="modal" data-target="#deleteModal">Eliminar</button>
+                    <button type="button" class="btn btn-warning btn-sm" disabled>Actualizar</button>                    
                 </td>
                 </tr>
             </tbody>
@@ -72,17 +78,16 @@
     </div>
 </div>
 
-<div *ngIf="!auth.estado" class="row justify-content-center">
-    <div class="col-10">
-        <div class="alert alert-danger" role="alert">
-            <h4 class="alert-heading">Solo Personal Autorizado!</h4>
-            <p>El area de administracion se utiliza para hacer cambios en la lista de animales dentro de la protectora. Solo puede acceder el personal autorizado.</p>
-            <hr>
-            <p class="mb-0">En caso de estar autorizado inicia sesion y regresa a esta ventana.</p>
-        </div>
+<!-- Vista para usuarios NO Logeados -->
+<div *ngIf="!auth.estado" class="card text-white bg-danger mb-3">
+    <div class="card-header">Solo Personal Autorizado!</div>
+    <div class="card-body">
+        <h4 class="card-title">El area de administracion se utiliza para hacer cambios en la lista de animales dentro de la protectora. Solo puede acceder el personal autorizado.</h4>
+        <p class="card-text">En caso de estar autorizado inicia sesion y regresa a esta ventana.</p>
     </div>
 </div>
-<!-- Modal -->
+
+<!-- Modal para preguntar si esta seguro de eliminar al animal-->
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">

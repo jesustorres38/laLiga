@@ -60,8 +60,7 @@ export class AuthService {
         edad: animalData.edad,
         sexo: animalData.sexo,
         origen: animalData.origen,
-        nota: animalData.nota,
-        foto: animalData.foto
+        nota: animalData.nota
     })
     .then( res => {
         console.log("Se agrego a: "+res.id+" a la base de datos");
