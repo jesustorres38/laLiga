@@ -16,6 +16,8 @@ export class AuthService {
   //para mostrar el perfil en dog-profile
   public animalProfile = {};
   public animalFoto = "";
+  //spiner loading icon
+  public cargando: boolean = false;
 
   constructor(public ruta: Router) { }
 
@@ -80,6 +82,7 @@ export class AuthService {
     //reseteamos valores
     this.animalesId = [];
     this.animales = [];
+    this.cargando = true;
     
     var animales = firebase.firestore().collection("animales").get();
     animales.then(res => {
@@ -89,6 +92,7 @@ export class AuthService {
          this.animalesId.push(doc.id);
          this.animales.push(doc.data());
       });
+      this.cargando = false;
     });
     animales.catch(res => {
       console.log(res.message);
@@ -98,6 +102,7 @@ export class AuthService {
   showAnimal(id){
     this.animalProfile = {};
     this.animalFoto = "";
+    this.cargando = true;
     //obtenemos los datos del perfil
     var animalProfile = firebase.firestore().collection("animales").doc(id).get();
     animalProfile.then(res => {
@@ -115,10 +120,13 @@ export class AuthService {
     var url = firebase.storage().ref('imagenes/'+id).getDownloadURL();
     url.then(res => {
       this.animalFoto = res;
+      this.cargando = false;
     });
     url.catch(res => {
+      //si tiene problemas en encontrar la foto le ponemos la foto por defecto
       this.animalFoto = "./assets/profile-pic.jpg";
       console.log(res.message);
+      this.cargando = false;
     });
   }
 

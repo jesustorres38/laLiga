@@ -5,18 +5,38 @@
   </div>
 </section>
 <div class="row justify-content-center">
-    <div *ngFor="let x of auth.animales; let i=index">
-      <div class="col-md-3">
-        <p>Id: {{auth.animalesId[i]}}</p> 
-        <div class="card" style="width: 15rem;">
-          <img class="card-img-top img-fluid" src="./assets/animales.png" alt="Card image cap">
-          <div class="card-body">
-            <p>Nombre: <strong>{{x.nombre}}</strong>, {{x.edad}} años.</p>
-            <p>Origen:<i class="text-muted">"{{x.origen}}"</i></p>
-            <a routerLink="/perros-profile/{{auth.animalesId[i]}}" class="btn btn-success">Ver</a>
-          </div>
-        </div>
-        <br>
-      </div>
-    </div>
+  <!-- Lista para Mostrar los Animales -->
+  <div class="col-10">
+      <table class="table table-hover table-responsive justify-content-center">
+          <thead>
+              <tr>
+              <th scope="col">#</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Edad</th>
+              <th scope="col">Sexo</th>
+              <th scope="col">Identificador</th>
+              <th scope="col">Origen</th>
+              <th><i class="fa fa-picture-o" aria-hidden="true"></i></th>
+              </tr>
+          </thead>
+          <tbody *ngFor="let x of auth.animales; let i=index">
+              <tr>
+              <th scope="row">{{i+1}}</th>
+              <td>{{x.nombre}}</td>
+              <td>{{x.edad}}</td>
+              <td>{{x.sexo}}</td>
+              <td>{{auth.animalesId[i]}}</td>
+              <td>{{x.origen}}</td>
+              <td>
+                <button type="button" class="btn btn-success btn-sm" routerLink="/perros-profile/{{auth.animalesId[i]}}">Ver</button>                   
+              </td>
+              </tr>
+          </tbody>
+      </table> 
+      <br>
+  </div>
+  <div class="col-3">
+      <i *ngIf="auth.cargando" class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
+      <span class="sr-only">Loading...</span>
+  </div>
 </div>
