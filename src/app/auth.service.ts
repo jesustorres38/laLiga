@@ -14,7 +14,7 @@ export class AuthService {
   public animales = [];
   public animalesId = [];
   //para mostrar el perfil en dog-profile
-  public animalProfile = {};
+  public animalProfile: any;
   public animalFoto = "";
   //spiner loading icon
   public cargando: boolean = false;
