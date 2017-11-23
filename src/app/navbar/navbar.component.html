@@ -6,27 +6,27 @@
   
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/inicio" routerLinkActive="active">Inicio</a>
+        <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
+          <a class="nav-link" routerLink="/inicio" routerLinkActive="active" >Inicio</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
             <a class="nav-link" routerLink="/perros" routerLinkActive="active">Perros</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
             <a class="nav-link" routerLink="/contacto" routerLinkActive="active">Contacto</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
           <a class="nav-link" routerLink="/administrar" routerLinkActive="active">Administrar</a>
         </li>
       </ul>
       <ul *ngIf="!auth.estado" class="navbar-nav navbar-right">
-        <li class="nav-item">
+        <li class="nav-item"  data-toggle="collapse" data-target=".navbar-collapse.show">
             <a class="nav-link" routerLink="/login" routerLinkActive="active">Iniciar sesion <i class="fa fa-sign-in"></i></a>
         </li>
       </ul>
       <ul *ngIf="auth.estado" class="navbar-nav navbar-right">
         <li class="nav-item">
-            <a data-toggle="modal" data-target="#exampleModal" class="nav-link" >Salir <i class="fa fa-sign-out"></i></a>
+            <a data-toggle="modal" data-target="#exampleModal" class="nav-link">Salir <i class="fa fa-sign-out"></i></a>
         </li>
       </ul>
     </div>
