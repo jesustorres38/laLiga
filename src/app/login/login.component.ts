@@ -13,9 +13,10 @@ export class LoginComponent implements OnInit {
 
   public formularioLogin;
 
-  constructor(public auth: AuthService) {   }
+  constructor(public auth: AuthService) {     }
 
   ngOnInit() {
+    this.auth.errorLogIn = "";
     this.formularioLogin = new FormGroup({
       email: new FormControl(),
       password: new FormControl()

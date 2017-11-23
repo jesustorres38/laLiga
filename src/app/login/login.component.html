@@ -1,10 +1,10 @@
 <section class="jumbotron text-center">
   <div class="container">
     <h1 class="jumbotron-heading">Login</h1>
-    <p class="lead text-muted">Inicia sesion con tus datos para poder acceder al area de administracion.</p>
+    <p class="lead text-muted">Inicia sesion con tus datos para poder acceder al area de administracion. ---"user: prueba@prueba.com  pass: prueba123"</p>
   </div>
 </section>
-<div class="row">
+<div class="row justify-content-center">
   <div class="col-10">
     <form [formGroup]="formularioLogin" (ngSubmit)="auth.logIn(formularioLogin.value)">
       <div class="form-group" >
