@@ -5,5 +5,3 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 ## Angular and Bootstrap
 
 Project to store and visualize the animals that are inside a shelter along with other data.
-
-
