@@ -1,18 +1,19 @@
 <div class="row justify-content-center">
-  <div class="col-10">
-    <section class="jumbotron text-center">
-      <div class="container">
-        <h1 class="jumbotron-heading">{{auth.animalProfile.nombre}}</h1>
-        <p class="lead text-muted"><strong>{{auth.animalProfile.edad}} (Años), {{auth.animalProfile.sexo}}:</strong> {{auth.animalProfile.origen}}  .</p>
-        <p class="lead text-muted">{{auth.animalProfile.nota}}</p>
-      </div>
+  <div *ngIf="auth.cargando" class="text-center">
       <!-- Show a loading icon while get the content -->
-        <i *ngIf="auth.cargando" class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
-        <span class="sr-only">Loading...</span>
-    </section>
-  </div>  
-  <div class="col-md-6 col-sm-8 col-10">
-      <img class="img-fluid" src="{{auth.animalFoto}}">         
-      <br><br> 
+      <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
+      <span class="sr-only">Loading...</span>
   </div>
+  <div *ngIf="!auth.cargando" class="col-10 mb-5">
+    <div class="card mx-auto" style="width: 18rem;">
+      <img class="card-img-top" src="{{auth.animalFoto}}" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">{{auth.animalProfile.nombre}}</h5>
+        <p class="card-text"><strong>{{auth.animalProfile.edad}} (Años), {{auth.animalProfile.sexo}}:</strong> {{auth.animalProfile.origen}}.</p>
+        <p class="card-text">{{auth.animalProfile.nota}}</p>
+        <a routerLink="/contacto" class="btn btn-success">Contacto</a>
+      </div>
+    </div>
+  </div>  
+  
 </div>
